@@ -85,8 +85,8 @@
      char-list))
   
   (include "font.scm")
-  (include "scm-lib-macro.scm")
   (include "ppm-reader.scm")
+  (include "../include/scm-lib_.scm")
   (include "scm-lib.scm")
 
   ;; Ensure that the char indices will be coherent between the macro

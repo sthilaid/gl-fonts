@@ -22,7 +22,7 @@
 (define-macro (define-sprite filename)
   (include "ppm-reader.scm")
   (include "texture-macro.scm")
-  (include "scm-lib-macro.scm")
+  (include "../include/scm-lib_.scm")
   (include "scm-lib.scm")
 
   (let* ((image-name (path-strip-directory
