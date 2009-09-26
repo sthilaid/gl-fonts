@@ -4,8 +4,13 @@ SRC_PATH=$(PREFIX)/src
 LIB_PATH=$(PREFIX)/lib
 EXTERNAL_LIBS=$(PREFIX)/external-libs
 
-INCLUDE_FILES=scm-lib_.scm texture_.scm sprite_.scm font_.scm
-LIB_FILES=scm-lib.o1 ppm-reader.o1 texture.o1 sprite.o1 font.o1
+scm-lib-PATH=git://github.com/sthilaid/scm-lib.git
+open-gl-ffi-PATH=git://github.com/sthilaid/open-gl-ffi.git
+
+INCLUDE_FILES=scm-lib_.scm opengl_.scm glu_.scm glut_.scm \
+              texture_.scm sprite_.scm font_.scm
+LIB_FILES=scm-lib.o1 opengl.o1 glu.o1 glut.o1 \
+          ppm-reader.o1 texture.o1 sprite.o1 font.o1
 
 all: prefix include lib
 
@@ -29,13 +34,27 @@ setup-scm-lib:
 	mkdir -p $(LIB_PATH)
 	mkdir -p $(EXTERNAL_LIBS)
 ifeq "$(wildcard $(EXTERNAL_LIBS)/scm-lib)" ""
-	cd $(EXTERNAL_LIBS) && git clone git://github.com/sthilaid/scm-lib.git
+	cd $(EXTERNAL_LIBS) && git clone $(scm-lib-PATH)
 endif
 	cd $(EXTERNAL_LIBS)/scm-lib && git pull
 	$(MAKE) -C $(EXTERNAL_LIBS)/scm-lib
 	cp $(EXTERNAL_LIBS)/scm-lib/include/* $(SRC_PATH)/
 	cp $(EXTERNAL_LIBS)/scm-lib/src/* $(SRC_PATH)/
 	cp $(EXTERNAL_LIBS)/scm-lib/lib/* $(LIB_PATH)/
+
+$(addprefix $(SRC_PATH)/, opengl.scm opengl_.scm glu.scm glu_.scm glut.scm \
+                          glut_.scm): setup-open-gl-ffi
+setup-open-gl-ffi:
+	mkdir -p $(LIB_PATH)
+	mkdir -p $(EXTERNAL_LIBS)
+ifeq "$(wildcard $(EXTERNAL_LIBS)/open-gl-ffi)" ""
+	cd $(EXTERNAL_LIBS) && git clone $(open-gl-ffi-PATH)
+endif
+	cd $(EXTERNAL_LIBS)/open-gl-ffi && git pull
+	$(MAKE) -C $(EXTERNAL_LIBS)/open-gl-ffi
+	cp $(EXTERNAL_LIBS)/open-gl-ffi/include/* $(SRC_PATH)/
+	cp $(EXTERNAL_LIBS)/open-gl-ffi/src/* $(SRC_PATH)/
+	cp $(EXTERNAL_LIBS)/open-gl-ffi/lib/* $(LIB_PATH)/
 
 clean:
 	rm -rf $(EXTERNAL_LIBS) $(INCLUDE_PATH) $(LIB_PATH)
