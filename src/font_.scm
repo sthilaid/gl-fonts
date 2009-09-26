@@ -84,10 +84,10 @@
           (get-char-index font-name (caar b) (cadar b))))
      char-list))
   
-  (include "font.scm")
-  (include "ppm-reader.scm")
+  (include "../src/font.scm")
+  (include "../src/ppm-reader.scm")
   (include "../include/scm-lib_.scm")
-  (include "scm-lib.scm")
+  (include "../scr/scm-lib.scm")
 
   ;; Ensure that the char indices will be coherent between the macro
   ;; expansion and the runtime with this call...
