@@ -21,7 +21,7 @@
 
 (define-macro (define-sprite filename)
   (include "ppm-reader.scm")
-  (include "texture-macro.scm")
+  (include "texture_.scm")
   (include "../include/scm-lib_.scm")
   (include "scm-lib.scm")
 
