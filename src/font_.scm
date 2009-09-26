@@ -87,7 +87,7 @@
   (include "src/font.scm")
   (include "src/ppm-reader.scm")
   (include "include/scm-lib_.scm")
-  (include "scr/scm-lib.scm")
+  (include "src/scm-lib.scm")
 
   ;; Ensure that the char indices will be coherent between the macro
   ;; expansion and the runtime with this call...
