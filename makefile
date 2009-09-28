@@ -4,13 +4,8 @@ SRC_PATH=$(PREFIX)/src
 LIB_PATH=$(PREFIX)/lib
 EXTERNAL_LIBS=$(PREFIX)/external-libs
 
-scm-lib-PATH=git://github.com/sthilaid/scm-lib.git
-open-gl-ffi-PATH=git://github.com/sthilaid/open-gl-ffi.git
-
-export scm-lib-PATH
-export open-gl-ffi-PATH
-
-export-paths: scm-lib-PATH=$(scm-lib-PATH) open-gl-ffi-PATH=$(open-gl-ffi-PATH)
+export scm-lib-PATH=git://github.com/sthilaid/scm-lib.git
+export open-gl-ffi-PATH=git://github.com/sthilaid/open-gl-ffi.git
 
 INCLUDE_FILES=scm-lib_.scm opengl_.scm glu_.scm glut_.scm \
               texture_.scm sprite_.scm font_.scm
@@ -42,7 +37,7 @@ ifeq "$(wildcard $(EXTERNAL_LIBS)/scm-lib)" ""
 	cd $(EXTERNAL_LIBS) && git clone $(scm-lib-PATH)
 endif
 	cd $(EXTERNAL_LIBS)/scm-lib && git pull
-	$(MAKE) -C $(EXTERNAL_LIBS)/scm-lib $(export-paths)
+	$(MAKE) -C $(EXTERNAL_LIBS)/scm-lib
 	cp $(EXTERNAL_LIBS)/scm-lib/include/* $(SRC_PATH)/
 	cp $(EXTERNAL_LIBS)/scm-lib/src/* $(SRC_PATH)/
 	cp $(EXTERNAL_LIBS)/scm-lib/lib/* $(LIB_PATH)/
@@ -56,7 +51,7 @@ ifeq "$(wildcard $(EXTERNAL_LIBS)/open-gl-ffi)" ""
 	cd $(EXTERNAL_LIBS) && git clone $(open-gl-ffi-PATH)
 endif
 	cd $(EXTERNAL_LIBS)/open-gl-ffi && git pull
-	$(MAKE) -C $(EXTERNAL_LIBS)/open-gl-ffi $(export-paths)
+	$(MAKE) -C $(EXTERNAL_LIBS)/open-gl-ffi
 	cp $(EXTERNAL_LIBS)/open-gl-ffi/include/* $(SRC_PATH)/
 	cp $(EXTERNAL_LIBS)/open-gl-ffi/src/* $(SRC_PATH)/
 	cp $(EXTERNAL_LIBS)/open-gl-ffi/lib/* $(LIB_PATH)/
