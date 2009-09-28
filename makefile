@@ -7,6 +7,9 @@ EXTERNAL_LIBS=$(PREFIX)/external-libs
 scm-lib-PATH=git://github.com/sthilaid/scm-lib.git
 open-gl-ffi-PATH=git://github.com/sthilaid/open-gl-ffi.git
 
+export scm-lib-PATH
+export open-gl-ffi-PATH
+
 INCLUDE_FILES=scm-lib_.scm opengl_.scm glu_.scm glut_.scm \
               texture_.scm sprite_.scm font_.scm
 LIB_FILES=scm-lib.o1 opengl.o1 glu.o1 glut.o1 \
